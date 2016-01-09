@@ -47,6 +47,9 @@
           Documentation at /docs/config/service.html
       -->
     <Service name="Catalina">
+
+        <!-- See https://confluence.atlassian.com/jira/integrating-jira-with-apache-using-ssl-203395380.html -->
+
         <Connector port="8080" maxThreads="150" minSpareThreads="25" connectionTimeout="20000" enableLookups="false"
                    maxHttpHeaderSize="8192" protocol="HTTP/1.1" useBodyEncodingForURI="true" redirectPort="8443"
                    acceptCount="100" disableUploadTimeout="true" scheme="https" proxyName="jira.viurdata.com"
