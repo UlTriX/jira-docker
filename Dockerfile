@@ -20,6 +20,7 @@ RUN tar zxf /root/jira.tar.gz --strip=1 -C /opt/jira
 RUN chown -R jira:jira /opt/atlassian-home
 RUN echo "jira.home = /opt/atlassian-home" > /opt/jira/atlassian-jira/WEB-INF/classes/jira-application.properties
 RUN chown -R jira:jira /opt/jira
+ADD server.xml /opt/jira/conf/server.xml
 RUN mv /opt/jira/conf/server.xml /opt/jira/conf/server-backup.xml
 
 ENV CONTEXT_PATH ROOT

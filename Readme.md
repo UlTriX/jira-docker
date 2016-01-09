@@ -2,23 +2,23 @@
 
 Forked from [atlassian-docker](https://bitbucket.org/atlassianlabs/atlassian-docker).
 
-Deploy a working jira installation via docker. Works exceptionally well with [dokku-alt](https://github.com/dokku-alt/dokku-alt).
+Deploy a working jira installation via docker. Works exceptionally well with [dokku](https://github.com/dokku-alt/dokku-alt).
 
 Current Jira version: **6.3**
 
 
-##Deployment with dokku-alt
+##Deployment with dokku
 
 Setup a postgresql database on your server with dokku:
 
 ```
-$ dokku postgresql:create jira
+$ dokku postgres:create jira
 ```
 
 Clone this repo and add your server's dokku url to your repositories' remotes (let's call our app ```jira``` as well):
 
 ```
-$ git clone https://github.com/chmanie/jira-docker
+$ git clone https://github.com/UlTriX/jira-docker
 $ cd jira-docker
 $ git remote add dokku dokku@your-server.com:jira
 ```
@@ -38,7 +38,7 @@ Grab a hot beverage. This may take some time. The docker container is built from
 To link the database to our app we need to:
 
 ```
-$ dokku postgresql:link jira jira
+$ dokku postgres:link jira jira
 ```
 
 The DB credentials should be spit out right now and are available in the ENV variable $DATABASE_URL on build time. You can get them after the app is deployed via ```dokku config jira```.
@@ -50,14 +50,13 @@ I put that right inside my app folder:
 mkdir -p /home/dokku/jira/data
 ```
 
-dokku-alt allows us to pass additional arguments to ```docker run``` via a DOCKER_ARGS file sitting inside the app folder. We are passing arguments to mount the data folder to the /opt/atlassian-home directory in the container:
+dokku allows us to pass additional arguments to ```docker run``` via a DOCKER_ARGS file sitting inside the app folder. We are passing arguments to mount the data folder to the /opt/atlassian-home directory in the container:
 
 ```
-touch /home/dokku/jira/DOCKER_ARGS
-echo "-v /home/dokku/jira/data:/opt/atlassian-home" > /home/dokku/jira/DOCKER_ARGS
+dokku docker-options:add jira deploy "-v /home/dokku/jira/data:/opt/atlassian-home"
 ```
 
-Redeploy the app or ```dokku rebuild jira```
+Redeploy the app or ```dokku ps:rebuild jira```
 
 ###Setup
 
