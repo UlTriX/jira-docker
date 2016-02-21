@@ -12,7 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install oracle-java8-installer -y
 
 # Install Jira
 
-ENV JIRA_VERSION 7.0.7
+ENV JIRA_VERSION 7.0.10
 RUN curl -Lks https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-${JIRA_VERSION}-jira-${JIRA_VERSION}.tar.gz -o /root/jira.tar.gz
 
 RUN /usr/sbin/useradd --create-home --home-dir /opt/jira --groups atlassian --shell /bin/bash jira
